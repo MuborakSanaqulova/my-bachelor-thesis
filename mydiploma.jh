@@ -1,0 +1,90 @@
+
+entity Category {
+	name String,
+    descrition String
+}
+
+entity Profession {
+	name String,
+    month Integer,
+    description String
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity Course {
+	name String,
+	description String,
+	price Long
+}
+
+entity File {
+	type String,
+    name String,
+    pathUrl String
+}
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+entity Topic {
+	title String,
+	description String
+}
+
+/**
+ * The Employee entity.
+ */
+entity User {
+	/**
+	* The firstname attribute.
+	*/
+	firstName String,
+	lastName String,
+	email String,
+	phoneNumber String,
+	birthDate Instant,
+	login String,
+	password String
+    role Role
+}
+
+enum Role {
+	ROLE_STUDENT, ROLE_TEACHER, ROLE_ADMIN
+}
+
+entity Payment {
+	paymentDate Instant,
+	cardNumber String,
+    amount Long
+}
+
+relationship ManyToOne {
+	Profession{category} to Category
+}
+
+relationship ManyToOne {
+	Course{profession} to Profession
+}
+
+relationship ManyToOne {
+	Topic{course} to Course
+}
+
+relationship ManyToOne {
+	File{topic} to Topic
+}
+
+relationship ManyToOne {
+	Payment{user} to User
+}
+
+relationship ManyToOne {
+	Payment{course} to Course
+}
+
+relationship ManyToMany {
+	User{course(id)} to Course{user}
+}
+
